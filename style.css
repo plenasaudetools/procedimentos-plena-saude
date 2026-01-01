@@ -2325,61 +2325,65 @@ nav.nav-menu a:hover::after {
   }
 
   /* CINE GALLERY MOBILE (CLINICAL) */
+  /* CINE GALLERY MOBILE (CLINICAL) - PIN ENABLED */
   .clinical {
-    padding: 4rem 0;
-    height: auto;
-    overflow: auto;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .clinical-section-pin {
-    height: auto;
-    display: block;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
 
   .clinical-header-absolute {
-    position: relative;
-    top: auto;
-    left: auto;
-    padding: 0 5vw;
-    margin-bottom: 3rem;
-    max-width: 100%;
-    pointer-events: auto;
+    position: absolute;
+    top: 5rem;
+    left: 1.5rem;
+    padding: 0;
+    margin-bottom: 0;
+    max-width: 90%;
+    pointer-events: none;
+    z-index: 10;
   }
 
   .clinical-track-wrapper {
-    height: auto;
-    /* Allow auto height */
+    height: 100vh;
+    /* Full height for pinning */
     width: 100%;
     display: flex;
-    overflow-x: auto;
+    align-items: center;
     margin-top: 0;
-    /* Native Horizontal Scroll */
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 2rem;
-    scrollbar-width: none;
-  }
-
-  .clinical-track-wrapper::-webkit-scrollbar {
-    display: none;
+    overflow: hidden;
+    /* GSAP controls scroll know */
+    padding-bottom: 0;
   }
 
   .clinical-track {
-    padding: 0 5vw;
-    /* Align start */
-    padding-right: 5vw;
-    gap: 1rem;
-    /* Tighter gap */
+    padding: 0;
+    padding-left: 50vw;
+    /* Start with offset */
+    gap: 1.5rem;
     width: max-content;
-    /* Allow flow */
+    display: flex;
+    align-items: center;
   }
 
   .cine-card {
-    min-width: 80vw;
-    /* Reduced to show next card peek */
-    height: 60vh;
-    scroll-snap-align: center;
-    border-radius: 6px;
+    width: 85vw;
+    /* Optimal mobile width */
+    min-width: 85vw;
+    height: 55vh;
+    /* Optimal mobile height */
+    border-radius: 8px;
+    scroll-snap-align: none;
+    /* Disable native snap */
   }
 
   .cine-num {

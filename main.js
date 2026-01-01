@@ -23,43 +23,48 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 1. HORIZONTAL SCROLL FOR CLINICAL SECTION (Desktop Only)
-  if (window.innerWidth > 1024) {
-    const raceContainer = document.querySelector(".clinical-track-wrapper");
-    const race = document.querySelector(".clinical-track");
+  // 1. HORIZONTAL SCROLL FOR CLINICAL SECTION (Responsive)
+  const raceContainer = document.querySelector(".clinical-track-wrapper");
+  const race = document.querySelector(".clinical-track");
 
-    if (raceContainer && race) {
-      function getScrollAmount() {
-        let raceWidth = race.scrollWidth;
-        return -(raceWidth - window.innerWidth + 100);
+  if (raceContainer && race) {
+    function getScrollAmount() {
+      let raceWidth = race.scrollWidth;
+      // Adjusted offset calculation for mobile vs desktop
+      if (window.innerWidth <= 1024) {
+        // Mobile offset
+        return -(raceWidth - window.innerWidth + 20);
       }
-
-      const totalDist = getScrollAmount();
-
-      // Dynamic horizontal scroll with friction
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".clinical-section-pin",
-          start: "top top",
-          end: "+=3500", // Long distance for weight
-          pin: true,
-          scrub: 1, // Smooth interaction
-          invalidateOnRefresh: true, // Recalculate on resize
-        }
-      });
-
-      tl.to(race, {
-        x: () => getScrollAmount(), // Function ensures recalculation if dimensions change
-        ease: "power2.out", // Starts elegant/fast, ends with strong resistance (friction)
-        duration: 1
-      });
-
-      // Sync Progress Bar (Desktop)
-      tl.to(".clinical-progress-fill-bar", {
-        width: "100%",
-        ease: "none"
-      }, "<");
-
+      return -(raceWidth - window.innerWidth + 100);
     }
+
+    // Determine scroll distance based on device to control speed feel
+    const isMobile = window.innerWidth <= 1024;
+    const scrollDistance = isMobile ? "+=1500" : "+=3500";
+
+    // Dynamic horizontal scroll with friction
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".clinical-section-pin",
+        start: "top top",
+        end: scrollDistance,
+        pin: true,
+        scrub: 1, // Smooth interaction
+        invalidateOnRefresh: true, // Recalculate on resize
+      }
+    });
+
+    tl.to(race, {
+      x: () => getScrollAmount(), // Function ensures recalculation if dimensions change
+      ease: "power2.out", // Starts elegant/fast, ends with strong resistance (friction)
+      duration: 1
+    });
+
+    // Sync Progress Bar (Universal)
+    tl.to(".clinical-progress-fill-bar", {
+      width: "100%",
+      ease: "none"
+    }, "<");
   }
 
   // Mobile Progress Bar Logic (Native Scroll)
