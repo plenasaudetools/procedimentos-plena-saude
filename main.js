@@ -3,8 +3,67 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // 0. FLOATING HEADER LOGIC
+  // 0. MOBILE MENU INJECTION & LOGIC
   const header = document.querySelector('.header');
+
+  if (header) {
+    // 1. Create HashMap for Links (Maintain reference to index.html for external pages)
+    const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
+    const basePath = isIndex ? '' : 'index.html';
+
+    // 2. Inject HTML for Button and Overlay
+    const btnHTML = `
+      <button class="mobile-menu-btn" aria-label="Abrir Menu">
+        <span></span>
+        <span></span>
+      </button>
+    `;
+
+    const overlayHTML = `
+      <div class="mobile-nav-overlay">
+        <a href="${basePath}#cycle" class="mobile-nav-link">O Ciclo</a>
+        <a href="${basePath}#facial" class="mobile-nav-link">Estética Facial</a>
+        <a href="${basePath}#complementary" class="mobile-nav-link">Complementar</a>
+        <a href="${basePath}#clinical" class="mobile-nav-link">Clínica Visual</a>
+        <a href="${basePath}#contato" class="mobile-nav-link">Agendar Contato</a>
+      </div>
+    `;
+
+    // Append to Header
+    header.insertAdjacentHTML('beforeend', btnHTML);
+    document.body.insertAdjacentHTML('beforeend', overlayHTML);
+
+    // 3. Bind Logic
+    const menuBtn = header.querySelector('.mobile-menu-btn');
+    const overlay = document.querySelector('.mobile-nav-overlay');
+    const links = overlay.querySelectorAll('.mobile-nav-link');
+
+    if (menuBtn && overlay) {
+      function toggleMenu() {
+        const isActive = menuBtn.classList.contains('active');
+        if (isActive) {
+          menuBtn.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = ''; // Release scroll
+        } else {
+          menuBtn.classList.add('active');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Lock scroll
+        }
+      }
+
+      menuBtn.addEventListener('click', toggleMenu);
+
+      // Close on link click
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          toggleMenu();
+        });
+      });
+    }
+  }
+
+  // 0. FLOATING HEADER LOGIC
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       header.classList.add('scrolled');
