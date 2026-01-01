@@ -2987,9 +2987,7 @@ nav.nav-menu a:hover::after {
   margin-left: 8px;
 }
 
-.tech-btn.solid.loading .btn-text {
-  /* keep text visible or hide? Let's keep it */
-}
+
 
 .tech-btn.solid.loading .btn-loader {
   display: block;
