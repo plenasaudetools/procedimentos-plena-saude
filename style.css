@@ -997,6 +997,10 @@ nav.nav-menu a:hover::after {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  background-color: var(--graphite-deep);
+  /* Ensure opacity over other sections */
+  z-index: 10;
+  /* Keep above subsequent sections during pinning */
 }
 
 .clinical-header-absolute {

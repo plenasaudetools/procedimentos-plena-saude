@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         start: "top top",
         end: scrollDistance,
         pin: true,
+        anticipatePin: 1, // Smooths out pinning transition
         scrub: 1, // Smooth interaction
         invalidateOnRefresh: true, // Recalculate on resize
       }
