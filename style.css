@@ -2337,14 +2337,18 @@ nav.nav-menu a:hover::after {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
+    /* Align cards to bottom */
+    padding-bottom: 10vh;
+    /* Space from bottom */
     position: relative;
     overflow: hidden;
   }
 
   .clinical-header-absolute {
     position: absolute;
-    top: 5rem;
+    top: 12vh;
+    /* Position header relative to viewport height */
     left: 1.5rem;
     padding: 0;
     margin-bottom: 0;
@@ -2354,12 +2358,13 @@ nav.nav-menu a:hover::after {
   }
 
   .clinical-track-wrapper {
-    height: 100vh;
+    height: auto;
+    /* Let content dictate height */
     width: 100%;
     display: flex;
     align-items: center;
-    margin-top: 15vh;
-    /* Pushes cards down below the header text */
+    margin-top: 0;
+    /* Reset */
     overflow: hidden;
     padding-bottom: 0;
   }
@@ -2367,7 +2372,6 @@ nav.nav-menu a:hover::after {
   .clinical-track {
     padding: 0;
     padding-left: 50vw;
-    /* Start with offset */
     gap: 1.5rem;
     width: max-content;
     display: flex;
@@ -2376,14 +2380,13 @@ nav.nav-menu a:hover::after {
 
   .cine-card {
     width: 85vw;
-    /* Optimal mobile width */
     min-width: 85vw;
-    height: 55vh;
-    /* Optimal mobile height */
+    height: 50vh;
+    /* Reduced height to fit */
     border-radius: 8px;
     scroll-snap-align: none;
-    /* Disable native snap */
   }
+
 
   .cine-num {
     font-size: 4rem;

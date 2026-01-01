@@ -40,7 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Determine scroll distance based on device to control speed feel
     const isMobile = window.innerWidth <= 1024;
-    const scrollDistance = isMobile ? "+=3000" : "+=3500";
+    // Mobile needs MORE vertical scroll to cover the horizontal width comfortably
+    const scrollDistance = isMobile ? "+=4500" : "+=3500";
 
     // Dynamic horizontal scroll with friction
     const tl = gsap.timeline({
