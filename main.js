@@ -222,6 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
       delay: 1.5,
       ease: "power3.out"
     });
+  } else {
+    // Hide immediately if already consented
+    cookieContainer.style.display = 'none';
   }
 
   // Toggle Settings Panel
