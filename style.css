@@ -1,0 +1,3042 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
+/* For Signature */
+
+
+:root {
+  /* REFERENCE PALETTE */
+  --graphite: #0f0f10;
+  --graphite-deep: #050505;
+  --ivory: #f2f2eb;
+  --sage-deep: #5c7a67;
+  --sage-light: #94b8a3;
+  --champagne: #d4c5a8;
+  --muted: #2a2a2e;
+
+  --color-bg: var(--graphite);
+  --color-card: var(--graphite-deep);
+  --color-text: var(--ivory);
+  --color-muted-text: #a3a398;
+  --color-accent: var(--sage-deep);
+  --color-gold: var(--champagne);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-script: 'Alex Brush', cursive;
+
+  --spacing-section: 15vh;
+  --ease-clinical: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* TYPOGRAPHY SYSTEM */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.text-display {
+  /* COMPACT CLAMP */
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  line-height: 1;
+  /* Tighter line height */
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.italic-serif {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.text-title {
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.2;
+}
+
+/* UTILS */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 5vw;
+  width: 100%;
+}
+
+.highlight {
+  color: var(--color-text);
+  font-style: italic;
+}
+
+.highlight-gold {
+  color: var(--color-gold);
+  font-style: italic;
+}
+
+/* LOADER */
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* HEADER - Floating Logic */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 5vw;
+  /* Slightly tighter */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transition: all 0.6s var(--ease-clinical);
+}
+
+.header.scrolled {
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  /* Wide bar per reference */
+  max-width: 1400px;
+  background: rgba(10, 10, 11, 0.85);
+  /* Slightly transparent */
+  backdrop-filter: blur(20px);
+  padding: 0.6rem 2rem;
+  border-radius: 12px;
+  /* Subtle rounding per usage */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.logo-img {
+  height: 40px;
+  /* Smaller default to save space */
+  width: auto;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.logo:hover .logo-img {
+  transform: scale(1.1);
+}
+
+.header.scrolled .logo-img {
+  height: 28px;
+}
+
+nav.nav-menu {
+  display: flex;
+  gap: 3rem;
+}
+
+.header.scrolled nav.nav-menu {
+  gap: 2rem;
+}
+
+nav.nav-menu a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  position: relative;
+  /* For the gold line */
+}
+
+nav.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.nav-menu a:hover {
+  opacity: 1;
+}
+
+nav.nav-menu a:hover::after {
+  width: 100%;
+}
+
+.cta-header-outline {
+  text-decoration: none;
+  color: var(--ivory);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  /* Sharp */
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-header-outline:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  /* White Glow */
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.header.scrolled .cta-header-outline {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold);
+  padding: 0.5rem 1.5rem;
+  box-shadow: none;
+  font-weight: 500;
+}
+
+.header.scrolled .cta-header-outline:hover {
+  background: rgba(212, 175, 55, 0.1);
+  /* Subtle Gold Tint */
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+  /* Gold Glow */
+  transform: translateY(-1px);
+}
+
+/* HERO SECTION - COMPACT FIT FINAL */
+.hero {
+  position: relative;
+  height: 100vh;
+  /* Use svh if available for mobile URL bar handling */
+  height: 100svh;
+  min-height: 550px;
+  /* Reduced min-height to fit smaller laptops */
+  background-image: url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center 30%;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(15, 15, 16, 0.5) 0%,
+      rgba(15, 15, 16, 0.1) 40%,
+      rgba(15, 15, 16, 0.9) 100%);
+  pointer-events: none;
+}
+
+.hero .container {
+  height: 100%;
+  display: grid;
+  /* ROW 1: Header Spacer (Reduced) | ROW 2: Content | ROW 3: Footer */
+  grid-template-rows: 100px 1fr auto;
+  /* Reduced from 120px */
+  position: relative;
+  z-index: 2;
+  padding-bottom: 3vh;
+  /* Dynamic bottom padding */
+}
+
+/* CONTENT WRAPPER */
+.hero-content-wrapper {
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Vertically center in the available space */
+  padding-top: 0;
+}
+
+/* 1. LABEL */
+.micro-label {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  /* Compact margin */
+}
+
+.micro-label .line {
+  height: 1px;
+  width: 48px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.micro-label span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 2. HEADLINE */
+.hero-title {
+  margin-bottom: 1rem;
+  /* Compact margin */
+  max-width: 900px;
+}
+
+/* 3. SUBTEXT BLOCK */
+.hero-sub-block {
+  padding-left: 0;
+  margin-left: 0.2rem;
+  max-width: 480px;
+}
+
+.hero-sub-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  /* Standard proper size */
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+/* FOOTER CONTROLS */
+.hero-footer-aligned {
+  grid-row: 3;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  /* Compact */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* REFINED CTA - "The Architectural Link" */
+.cta-group {
+  display: flex;
+}
+
+.cta-explore-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  color: var(--color-text);
+  /* group: hover; REMOVED INVALID PROPERTY */
+}
+
+/* The Label part of the CTA */
+.cta-explore-row .label-main {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  /* Scaled down slightly */
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  color: #fff;
+  transition: opacity 0.3s;
+}
+
+/* The Icon part */
+.cta-explore-row .circle-arrow {
+  width: 44px;
+  height: 44px;
+  /* Scaled down slightly */
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  transition: all 0.5s var(--ease-clinical);
+}
+
+.cta-explore-row:hover .circle-arrow {
+  border-color: #fff;
+  transform: rotate(-45deg);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hero-info-right {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* SCENE 2: O CICLO (Cycle) */
+.cycle-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--graphite);
+  /* Deep, clean background */
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cycle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.cycle-intro .text-title {
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  line-height: 1.3;
+  color: var(--color-text);
+  max-width: 500px;
+}
+
+.cycle-intro .highlight {
+  color: var(--color-muted-text);
+  /* Muted contrast as per Copy "Você entende..." */
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.8em;
+  font-family: var(--font-body);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.cycle-steps-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15vh;
+  /* Large scroll gaps */
+  padding: 10vh 0;
+  position: relative;
+  /* Context for line */
+}
+
+/* THE TIMELINE (Internal Only) */
+/* Reverted: Starts only alongside the steps, no hero connection */
+.cycle-progress-line {
+  position: absolute;
+  top: 10vh;
+  bottom: 0px;
+  left: 0;
+  /* Moving line to the absolute edge to avoid conflicts */
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 10;
+}
+
+/* IGNITION POINT REMOVED per user request */
+.cycle-progress-line::before {
+  display: none;
+}
+
+.cycle-progress-fill {
+  width: 100%;
+  height: 0%;
+  /* Will animate from top down */
+  background: linear-gradient(to bottom, var(--color-gold), #fff);
+  box-shadow: 0 0 15px var(--color-gold);
+  transition: height 0.1s linear;
+}
+
+
+.cycle-step-item {
+  position: relative;
+  padding-left: 4rem;
+  margin-bottom: 2.5rem;
+  /* Very tight spacing */
+  opacity: 0.3;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  min-height: auto;
+  /* Allow natural height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cycle-step-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.step-number {
+  position: relative;
+  left: auto;
+  top: auto;
+  width: auto;
+  text-align: left;
+  margin-bottom: 0.25rem;
+  /* Tighter gap to title */
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  /* Smaller number */
+  color: var(--color-muted-text);
+  transition: color 0.5s ease;
+}
+
+/* The Glowing Bullet on the Line - Centered on 0px line */
+.step-number::after {
+  content: '';
+  position: absolute;
+  left: -4rem;
+  /* (4rem padding) - places it at 0px aka on the line */
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* Center on line */
+  width: 8px;
+  height: 8px;
+  background: var(--graphite);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  z-index: 12;
+}
+
+.cycle-step-item.active .step-number::after {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 10px var(--color-gold);
+}
+
+
+.step-word {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  /* Reduced compact size */
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--color-muted-text);
+  /* Start dim */
+  margin-bottom: 0.5rem;
+  transition: color 0.5s ease;
+}
+
+/* For active state color change if desired */
+.cycle-step-item.active .step-word {
+  color: var(--ivory);
+  /* Lit */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* SCENE 3: SERVICE LEDGER (Facial) - COMPACT GRID */
+.facial {
+  background-color: var(--color-card);
+  /* #050505 Deep Black */
+}
+
+/* CTA at end of scene */
+.cta-scene-end {
+  grid-column: span 2;
+  /* Span full width */
+  margin-top: 3rem;
+  /* Reduced to pull button up closer to list */
+  display: flex;
+  justify-content: center;
+}
+
+/* Sutil Luxury CTA Button - Refined */
+.cta-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.2rem 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  /* Glass feel */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Very subtle border */
+  border-radius: 2px;
+  /* Sharp but not harsh */
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  /* Premium wide tracking */
+  font-size: 0.75rem;
+  font-weight: 400;
+  white-space: nowrap;
+  /* Force single line */
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-main:hover {
+  background: rgba(255, 255, 255, 0.05);
+  /* Slight light up */
+  border-color: var(--color-gold);
+  /* Gold hint on interaction */
+  color: var(--color-gold);
+  gap: 2rem;
+  /* Subtle expansion interaction */
+}
+
+.cta-main .circle {
+  display: none;
+}
+
+
+/* FAB CHAT */
+.fab-chat-wrapper {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 99;
+}
+
+.fab-chat {
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: visible;
+  /* Allow ripple outside */
+}
+
+.fab-chat:hover {
+  transform: scale(1.05);
+}
+
+/* Pulsing Ripple */
+.fab-ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #25D366;
+  animation: ripple 2s infinite ease-out;
+  z-index: -1;
+  /* Behind icon */
+}
+
+@keyframes ripple {
+  0% {
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    border-width: 1px;
+  }
+
+  100% {
+    width: 220%;
+    height: 220%;
+    opacity: 0;
+    border-width: 0px;
+  }
+}
+
+.fab-chat svg {
+  width: 32px;
+  height: 32px;
+  fill: #fff;
+  z-index: 2;
+}
+
+/* SECTIONS (Basic Styling for non-Hero to prevent breaking) */
+.scene {
+  padding: 10vh 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.method,
+.facial,
+.clinical,
+.complementary {
+  background: var(--color-card);
+}
+
+/* Swipe Logic - Default Hidden */
+.swipe-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+  padding-left: 0;
+  display: none;
+  /* Hide Desktop */
+}
+
+.swipe-hint span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+}
+
+.hand-icon {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  animation: swipeAnim 2s infinite ease-in-out;
+}
+
+@keyframes swipeAnim {
+
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+}
+
+.progress-container {
+  display: block;
+  /* Show only here */
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+  border-radius: 2px;
+  overflow: hidden;
+  display: none;
+  /* Hide Desktop */
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--color-gold);
+  transition: width 0.1s linear;
+}
+
+/* DESKTOP SERVICE BLOCK DEFAULTS */
+.service-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2.5rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.service-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  opacity: 0.7;
+  flex-shrink: 0;
+  transition: opacity 0.3s;
+}
+
+.service-block:hover .service-img {
+  opacity: 1;
+}
+
+.service-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.service-block:nth-child(odd)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.service-block:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.service-block h4 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-text);
+  transition: color 0.3s ease;
+  line-height: 1.1;
+}
+
+.service-block:hover h4 {
+  color: var(--color-gold);
+}
+
+.service-block p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-muted-text);
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.service-card-cta {
+  display: none;
+}
+
+/* Hide Desktop */
+.fake-button {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: var(--color-gold);
+  color: #000;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+}
+
+
+
+
+/* MARBLE TEXTURE OVERLAY */
+.texture-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  /* Above backgrounds, below header */
+  pointer-events: none;
+  opacity: 0.08;
+  /* Slightly increased for unification */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* HERO SCROLL CONNECTOR (The Thread) */
+/* HERO SCROLL CONNECTOR REMOVED */
+
+/* LIGHT THEME SECTION LOGIC & SCENE 4: COMPLEMENTAR */
+.section-light {
+  background-color: var(--ivory);
+  color: var(--graphite);
+  --color-text: var(--graphite);
+  /* Override local variable scope */
+  --color-muted-text: #595959;
+  --color-border: rgba(15, 15, 16, 0.1);
+}
+
+.complementary {
+  background-color: var(--ivory);
+  color: var(--graphite);
+  position: relative;
+  /* Ensure children inherit the light theme colors */
+  --color-text: var(--graphite);
+}
+
+/* In light section, adjust headers */
+.complementary .text-title {
+  color: var(--graphite);
+}
+
+.complementary .section-header .micro-label span {
+  color: var(--sage-deep);
+}
+
+.complementary .section-header .micro-label .line {
+  background-color: var(--sage-deep);
+}
+
+.complementary .section-header .highlight {
+  color: var(--sage-deep);
+}
+
+
+/* Light Theme CTA override */
+.complementary .cta-scene-end .cta-main {
+  border-color: rgba(15, 15, 16, 0.2);
+  color: var(--graphite);
+}
+
+.complementary .cta-scene-end .cta-main:hover {
+  background: var(--sage-deep);
+  border-color: var(--sage-deep);
+  color: var(--ivory);
+}
+
+/* SCENE 5: CLINICAL (Horizontal Cine-Gallery) */
+.clinical {
+  background-color: var(--graphite-deep);
+  /* Dark Immersion */
+  color: var(--ivory);
+  padding: 0;
+  overflow: visible;
+  position: relative;
+  z-index: 5;
+  margin-top: -1px;
+  /* Remove pixel gap potential */
+}
+
+/* ORGANIC CURVE SEPARATOR */
+.custom-shape-divider-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  transform: translateY(-99%);
+  z-index: 10;
+}
+
+.custom-shape-divider-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+
+.custom-shape-divider-top .shape-fill {
+  fill: var(--graphite-deep);
+}
+
+/* 4. Content Containers - MUST SIT ABOVE BG */
+#facial .section-header {
+  position: relative;
+  z-index: 5;
+  /* Lifts title above the image */
+}
+
+/* TOP TRANSITION MASK (Cycle -> Facial) */
+#facial::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh;
+  /* Fade distance */
+  background: linear-gradient(to bottom, var(--graphite) 0%, transparent 100%);
+  z-index: 4;
+  /* Above BG but below content */
+  pointer-events: none;
+}
+
+/* COMPLEMENTARY (Light Theme) */
+.complementary {
+  background-color: var(--ivory);
+  color: var(--graphite);
+  position: relative;
+  /* Ensure children inherit the light theme colors */
+  --color-text: var(--graphite);
+
+  /* TRANSITION LOGIC (Page Overlay Enhanced) */
+  z-index: 20;
+  /* Stronger lift effect */
+  box-shadow: 0 -40px 80px rgba(0, 0, 0, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* Softer edge */
+  margin-top: -3rem;
+  /* More overlap */
+  padding-top: calc(10vh + 3rem);
+  border-radius: 24px 24px 0 0;
+  /* Gentle curve like a folder tab */
+}
+
+/* GOLD TAB DETAIL (The Connector) */
+.complementary::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+/* Duplicated block removed. Keystone line deleted. */
+
+.clinical-section-pin {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.clinical-header-absolute {
+  position: absolute;
+  top: 2rem;
+  /* Move text up */
+  left: 5vw;
+  z-index: 10;
+  max-width: 40vw;
+  /* Allow wider text */
+  pointer-events: none;
+  /* Let clicks pass */
+}
+
+/* Header Text styling fix for dark mode */
+.clinical-header-absolute .text-title {
+  color: var(--ivory);
+}
+
+.clinical-header-absolute .highlight {
+  color: #888;
+}
+
+/* Muted silver */
+
+.clinical-progress-container {
+  margin-top: 2rem;
+  width: 150px;
+  /* Small line on desktop */
+}
+
+.clinical-progress-line {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.clinical-progress-fill-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--color-gold);
+  transition: width 0.1s linear;
+  /* Smooth for JS updates */
+}
+
+/* Mobile: Expand to be more visible? */
+@media (max-width: 768px) {
+  .clinical-progress-container {
+    width: 100%;
+    /* Full width or larger */
+    margin-top: 1rem;
+  }
+}
+
+
+.clinical-track-wrapper {
+  height: 70vh;
+  /* Focus area height */
+  margin-top: 25vh;
+  /* Greatly increased to push cards DOWN below the text */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* Will be controlled by GSAP on Desktop */
+}
+
+.clinical-track {
+  display: flex;
+  gap: 4rem;
+  /* Wide gap for luxury feel */
+  padding-left: 45vw;
+  /* Start pushed right so text is visible first */
+  padding-right: 10vw;
+  /* End with breathing room */
+  width: max-content;
+  /* Ensure it takes full width of children */
+}
+
+/* CINE CARD STYLE */
+.cine-card {
+  min-width: 400px;
+  /* Big posters */
+  height: 55vh;
+  /* Cinematic height */
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease;
+  flex-shrink: 0;
+  background: #000;
+}
+
+.cine-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: brightness(0.6) grayscale(10%);
+}
+
+.cine-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.8) grayscale(0%);
+}
+
+/* FINAL LUXURY CTA CARD */
+.cine-card-cta {
+  background: linear-gradient(145deg, rgba(20, 20, 22, 1) 0%, rgba(10, 10, 12, 1) 100%);
+  border: 1px solid rgba(212, 197, 168, 0.2);
+  /* Subtle Gold Border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Internal Glow */
+.cine-card-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(212, 197, 168, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cine-card-cta .cta-content {
+  text-align: center;
+  color: var(--ivory);
+  z-index: 2;
+  padding: 2rem;
+}
+
+.cine-card-cta h3 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+  color: var(--color-gold);
+  /* Gold Text */
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* Special Button for this Card */
+.cine-card-cta .cta-main {
+  background: var(--color-gold);
+  color: var(--graphite-deep);
+  /* Contrast */
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 1rem 2.5rem;
+  box-shadow: 0 4px 20px rgba(212, 197, 168, 0.3);
+  /* Gold Glow */
+  transition: all 0.4s ease;
+}
+
+.cine-card-cta .cta-main:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(212, 197, 168, 0.5);
+  background: #fff;
+  /* Flash white on hover */
+}
+
+/* CTA Card Styles Completed */
+
+/* Glass Overlay Content */
+.cine-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 10%, transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cine-num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 0.8;
+  color: rgba(255, 255, 255, 0.05);
+  /* Ghost number */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  pointer-events: none;
+}
+
+.cine-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--ivory);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.cine-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  max-width: 95%;
+  font-weight: 300;
+}
+
+/* =========================================
+   SCENE 3: FACIAL - UNIFIED ATMOSPHERE
+   ========================================= */
+
+#facial {
+  position: relative;
+  overflow: hidden;
+  /* No bg color needed as images/gradient cover it, but keep fallback */
+  background-color: var(--color-card);
+  padding-bottom: 10rem;
+  /* Space below button (distancing from bottom) */
+}
+
+/* 1. Background Layer - COVERS ENTIRE SECTION */
+.facial-bg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 2. Global Dimmer (To ensure text readability over bright images) */
+.facial-bg-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.7);
+  /* Strong dim */
+  z-index: 1;
+}
+
+/* 3. Soft Edges (Vignette) to blend section top/bottom */
+.facial-bg-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 15%, transparent 85%, var(--color-bg) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.facial-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  transform: scale(1.05);
+}
+
+/* When active, it's visible but behind the dimmer */
+/* When active, it's visible but behind the dimmer */
+.facial-bg-img.active {
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+.facial-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  transform: scale(1.05);
+  will-change: transform, opacity;
+}
+
+
+/* 4. Content Containers - MUST SIT ABOVE BG */
+#facial .section-header {
+  position: relative;
+  z-index: 5;
+  /* Lifts title above the image */
+}
+
+/* Wrapper for the LIST content */
+.facial-editorial-wrapper {
+  position: relative;
+  z-index: 5;
+  /* Above BG */
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8rem;
+  /* Increased spacing */
+  padding-top: 0;
+}
+
+/* The List Itself */
+/* Lux Editorial List Styling */
+.editorial-list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1000px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  counter-reset: editorial-counter;
+  /* Init counter */
+}
+
+.editorial-item {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  /* Align text baselines */
+  padding: 1.5rem 0;
+  /* More breathing room */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  color: rgba(255, 255, 255, 0.6);
+  /* Muted default */
+}
+
+/* Automatic Numbering with Luxury Font */
+.editorial-item::before {
+  counter-increment: editorial-counter 1;
+  content: "0" counter(editorial-counter);
+  /* Adds 01, 02... */
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--color-gold);
+  margin-right: 2rem;
+  position: absolute;
+  left: 0;
+  top: 1.8rem;
+  /* Align visually */
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.editorial-item-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  /* Resurrected Size - Large */
+  font-weight: 300;
+  line-height: 1.1;
+  margin: 0;
+  padding-left: 3rem;
+  /* Space for number */
+  transition: transform 0.5s var(--ease-clinical), color 0.3s;
+  color: currentColor;
+}
+
+.editorial-item-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  opacity: 0.85;
+  /* Slightly transparent again for elegance */
+  transform: translateX(0);
+  transition: all 0.5s ease;
+  max-width: 300px;
+  text-align: right;
+  letter-spacing: 0.03em;
+  color: var(--ivory);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  /* Softer shadow */
+  font-weight: 400;
+  /* Normal weight */
+}
+
+/* PROGRESIVE LINE FILL EFFECT */
+.editorial-item::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 0.6s ease;
+}
+
+/* Hover/Active State */
+.editorial-item:hover,
+.editorial-item.mobile-active,
+.editorial-item.active {
+  /* Added active class for JS persistence if needed */
+  padding-left: 1.5rem;
+  /* Larger shift */
+}
+
+/* Typography Shift */
+.editorial-item-title {
+  /* ...existing props... */
+  /* Remove old transitions to group them */
+  transition: transform 0.6s var(--ease-clinical), color 0.4s;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Sliding Arrow via Pseudo Element */
+.editorial-item-title::after {
+  content: '→';
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  margin-left: 1rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--color-gold);
+}
+
+.editorial-item:hover .editorial-item-title,
+.editorial-item.mobile-active .editorial-item-title {
+  color: var(--color-gold);
+  /* Typography Flair */
+  font-style: italic;
+  /* Dynamic shift */
+  letter-spacing: 0.02em;
+}
+
+.editorial-item:hover .editorial-item-title::after,
+.editorial-item.mobile-active .editorial-item-title::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.editorial-item:hover .editorial-item-desc,
+.editorial-item.mobile-active .editorial-item-desc {
+  opacity: 1;
+  color: var(--ivory);
+  transform: translateX(-10px);
+  /* Counter movement for depth */
+}
+
+/* RESPONSIVE SCENE 3 FIX */
+@media (max-width: 1024px) {
+  .facial-editorial-wrapper {
+    margin-top: 0;
+    padding-top: 2rem;
+    min-height: auto;
+  }
+
+  /* Make sure BG covers phone usage too */
+  .facial-bg-layer {
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
+  .facial-bg-img.active {
+    opacity: 0.6;
+  }
+
+  .editorial-item-title {
+    font-size: 1.6rem;
+  }
+
+  .editorial-item-desc {
+    display: none;
+  }
+
+  .editorial-item {
+    padding: 1.2rem 0;
+  }
+
+  .editorial-item:hover .editorial-item-title,
+  .editorial-item.mobile-active .editorial-item-title {
+    transform: translateX(10px);
+  }
+
+  /* HIDE fallback list strictly per user request */
+  .service-list-mobile-fallback {
+    display: none !important;
+  }
+}
+
+/* =========================================
+   SCENE 4: COMPLEMENTAR - LUXURY ACCORDION
+   ========================================= */
+.accordion-wrapper {
+  display: flex;
+  width: 100%;
+  height: 600px;
+  /* Fixed height for desktop */
+  gap: 0;
+  margin-top: 4rem;
+  background: white;
+  /* Container bg */
+}
+
+.acc-item {
+  flex: 1;
+  /* Start equal */
+  position: relative;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+/* Last item border fix */
+.acc-item:last-child {
+  border-right: none;
+}
+
+/* Expanded State (Hover) */
+.acc-item:hover {
+  flex: 4;
+  /* Grow significantly */
+  background: #fafaf5;
+  /* Ivory light */
+}
+
+/* Vertical Title (Collapsed State) */
+.acc-header-vertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(180deg);
+  width: 30px;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--graphite);
+  letter-spacing: 0.15em;
+  opacity: 1;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  text-transform: uppercase;
+}
+
+.acc-item:hover .acc-header-vertical {
+  opacity: 0;
+  /* Hide when expanding */
+}
+
+/* Expanded Content */
+.acc-content {
+  opacity: 0;
+  transform: translateY(20px);
+  width: 100%;
+  transition: all 0.5s ease 0.1s;
+  /* Slight delay */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center content */
+  text-align: center;
+  padding: 2rem;
+}
+
+.acc-item:hover .acc-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Acc Image */
+.acc-img-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 1;
+  filter: grayscale(20%);
+}
+
+.acc-item:hover .acc-img-bg {
+  opacity: 0.1;
+  /* Very subtle texture bg */
+}
+
+
+.acc-title-big {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--graphite);
+}
+
+.acc-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--sage-deep);
+  margin-bottom: 1.5rem;
+}
+
+.acc-desc {
+  max-width: 280px;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* =========================================
+   SCENE 6: TEAM (MANIFESTO) STYLING
+   ========================================= */
+.team-manifesto {
+  background-color: var(--color-bg);
+  /* Dark */
+  position: relative;
+  padding-bottom: 5rem;
+}
+
+/* SCENE 6: AUTHORITY SECTION (Vanderleia) */
+.team-authority {
+  background-color: var(--graphite);
+  padding-bottom: 0;
+  /* Let carousel flush to bottom */
+  overflow: hidden;
+}
+
+.authority-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding-bottom: 5rem;
+}
+
+.authority-content {
+  padding-right: 2rem;
+}
+
+.authority-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-muted-text);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 500px;
+}
+
+/* Glass Discipline Cards */
+.discipline-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.glass-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  /* Sharp technical feel */
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  max-width: 400px;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-gold);
+  transform: translateX(10px);
+}
+
+.card-icon {
+  color: var(--color-gold);
+  font-size: 1rem;
+}
+
+.glass-card h4 {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Authority Image */
+.authority-image-wrapper {
+  position: relative;
+  height: 600px;
+  border-radius: 8px;
+  /* Slightly softer */
+  overflow: hidden;
+}
+
+.authority-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  /* Start completely B&W */
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.authority-image-wrapper:hover .authority-img {
+  filter: grayscale(0%);
+  /* Full color on hover */
+  transform: scale(1.02);
+  /* Slight zoom for life */
+}
+
+.signature-overlay {
+  display: none;
+  /* Removed as requested */
+}
+
+/* SLIM INFINITE CAROUSEL */
+.atelier-carousel-wrapper {
+  width: 100vw;
+  /* Full viewport width */
+  margin-left: calc(-50vw + 50%);
+  /* Break out of container */
+  margin-bottom: 5vh;
+  /* Tiny space below? Or flush. Let's do flush to footer. */
+  height: 180px;
+  /* Slim strip height */
+  overflow: hidden;
+  position: relative;
+  background: var(--graphite-deep);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.atelier-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation: scrollInfinite 40s linear infinite;
+}
+
+.atelier-track:hover {
+  animation-play-state: paused;
+}
+
+.atelier-item {
+  height: 100%;
+  width: 280px;
+  /* Landscape-ish aspect for slim height */
+  flex-shrink: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
+  /* Separator */
+  overflow: hidden;
+  cursor: zoom-in;
+  position: relative;
+}
+
+.atelier-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: all 0.5s ease;
+}
+
+.atelier-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+@keyframes scrollInfinite {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* Scrolls half (the original set) then repeats */
+}
+
+/* Responsive Authority */
+@media (max-width: 768px) {
+  .authority-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .authority-image-wrapper {
+    height: 400px;
+    order: -1;
+    /* Image first on mobile? Or text first. Let's keep Text first for context. */
+  }
+
+  .glass-card {
+    max-width: 100%;
+  }
+
+  .atelier-carousel-wrapper {
+    height: 140px;
+    /* Even slimmer on mobile */
+  }
+}
+
+/* 1. Founder Card - Enhanced */
+/* End of Scene 6 Styles */
+
+/* 2. Squad Grid - Aligned & Soulful */
+.squad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.squad-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: transform 0.5s ease;
+}
+
+/* Image with Soul Word */
+.squad-img-wrapper {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #000;
+  position: relative;
+  /* Context for absolute */
+}
+
+.squad-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(0.9);
+  transition: all 0.6s var(--ease-clinical);
+  opacity: 0.8;
+}
+
+.soul-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(20px);
+  /* Start slightly down */
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  /* Hidden */
+  transition: all 0.5s ease;
+  z-index: 10;
+  pointer-events: none;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Hover Interaction */
+.squad-card:hover img {
+  filter: grayscale(0%) brightness(0.6);
+  /* Returns color but dims slightly for text */
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.squad-card:hover .soul-word {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
+}
+
+.squad-info h4 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--ivory);
+  line-height: 1.2;
+}
+
+.squad-role {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.squad-desc {
+  font-size: 0.9rem;
+  /* Increased readability */
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-top: 1rem;
+  max-width: 95%;
+}
+
+/* =========================================
+   SCENE 7: GRAND FINALE (ORBIT CTA)
+   ========================================= */
+.grand-finale {
+  min-height: 90vh;
+  /* Taller */
+  display: flex;
+  align-items: center;
+  background: radial-gradient(circle at center, #1a1a1c 0%, #050505 100%);
+  position: relative;
+}
+
+.finale-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5rem;
+}
+
+.finale-title {
+  max-width: 900px;
+  position: relative;
+  z-index: 10;
+}
+
+.finale-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  width: 100%;
+}
+
+/* THE ORBIT PORTAL BUTTON */
+.cta-orbit {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  /* Big click area */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.5s ease;
+}
+
+.cta-orbit:hover {
+  transform: scale(1.1);
+}
+
+/* The Solid Center */
+.orbit-center {
+  width: 100px;
+  height: 100px;
+  background: var(--ivory);
+  border-radius: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 30px rgba(242, 242, 235, 0.3);
+  transition: all 0.5s ease;
+}
+
+.orbit-text {
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  opacity: 1;
+}
+
+.cta-orbit:hover .orbit-center {
+  width: 120px;
+  height: 120px;
+  /* Expansion feel */
+  background: #fff;
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.6);
+}
+
+/* The Rings */
+.orbit-ring-1,
+.orbit-ring-2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  transition: all 0.8s ease;
+}
+
+.orbit-ring-1 {
+  width: 160px;
+  height: 160px;
+}
+
+.orbit-ring-2 {
+  width: 220px;
+  height: 220px;
+  opacity: 0.5;
+}
+
+.cta-orbit:hover .orbit-ring-1 {
+  width: 140px;
+  height: 140px;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cta-orbit:hover .orbit-ring-2 {
+  width: 180px;
+  height: 180px;
+  opacity: 0.2;
+}
+
+
+/* =========================================
+   ARCHITECTURAL FOOTER (NEW)
+   ========================================= */
+.footer-architectural {
+  background-color: #050505;
+  /* Deepest black */
+  padding: 6rem 0 2rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  /* 4 Cols */
+  gap: 4rem;
+  margin-bottom: 5rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.brand-col {
+  padding-right: 2rem;
+}
+
+.footer-logo {
+  width: 140px;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.footer-desc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.footer-head {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--ivory);
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-links li a,
+.footer-static {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.3s;
+  line-height: 1.5;
+  display: block;
+  /* For click area */
+}
+
+.footer-links li a:hover {
+  color: var(--color-gold);
+}
+
+.footer-social-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.footer-social-row a {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+}
+
+.footer-social-row a:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-muted-text);
+}
+
+.footer-bottom .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-end-right {
+  display: flex;
+  align-items: center;
+  padding-right: 80px;
+  /* Safe zone for FAB */
+}
+
+.agency-logo {
+  height: 25px;
+  /* Adjust size */
+  width: auto;
+  filter: brightness(0) invert(1);
+  /* Forces it to be 100% white */
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.agency-logo:hover {
+  opacity: 1;
+}
+
+
+/* =========================================
+   RESPONSIVE OVERRIDES (MOBILE/TABLET)
+   ========================================= */
+@media (max-width: 1024px) {
+
+  /* ADJUSTED: Less aggressive vertical spacing on mobile for flow */
+  .scene {
+    padding: 4rem 0;
+  }
+
+  .hero-footer-aligned {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .header {
+    padding: 1.5rem;
+  }
+
+  nav.nav-menu {
+    display: none;
+  }
+
+  .text-display {
+    font-size: 3rem;
+  }
+
+  .cycle-grid {
+    grid-template-columns: 1fr;
+    gap: 5rem;
+  }
+
+  /* ADJUSTED: Gap from 10vh to 4rem */
+  .cycle-steps-wrapper {
+    gap: 4rem;
+    padding: 4rem 0;
+  }
+
+  /* FORCE SHOW UTILS ON MOBILE */
+  .swipe-hint {
+    display: flex !important;
+  }
+
+  .progress-container {
+    display: block !important;
+  }
+
+  /* SCENE 3 RESPONSIVE - HORIZONTAL SWIPE CAROUSEL */
+  .service-list {
+    display: flex;
+    /* Horizontal flow */
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Snap effect */
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+    margin-right: -1.5rem;
+    padding-right: 1.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .service-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* MOBILE CARD STYLING */
+  .service-block {
+    min-width: 75vw;
+    /* Card Width */
+    scroll-snap-align: start;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0;
+    /* No padding on container due to image bleed */
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* Stack image top, text bottom */
+    align-items: stretch;
+  }
+
+  .service-img {
+    width: 100%;
+    height: 140px;
+    /* Panoramic crop */
+    border-radius: 0;
+    /* Flush with edge */
+    margin-bottom: 0;
+  }
+
+  .service-content {
+    padding: 1.5rem;
+  }
+
+  /* Final CTA Card Style */
+  .service-card-cta {
+    display: flex !important;
+    background: linear-gradient(145deg, rgba(212, 197, 168, 0.1), rgba(0, 0, 0, 0));
+    border: 1px solid var(--color-gold);
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 280px;
+    padding: 2rem;
+  }
+
+  /* Remove grid border logic */
+  .service-block:nth-child(odd)::after {
+    display: none;
+  }
+
+  .cta-scene-end {
+    grid-column: auto;
+    margin-top: 4rem;
+  }
+
+  /* Mobile Button adjustments to ensure single line */
+  .cta-main {
+    width: 100%;
+    /* Full width */
+    padding: 1.2rem 1rem;
+    justify-content: center;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    letter-spacing: 0.15em;
+  }
+
+  .section-light .cta-main {
+    border-color: rgba(15, 15, 16, 0.3);
+  }
+
+  /* PREMIUM GRID MOBILE OVERRIDE */
+  .premium-grid {
+    grid-template-columns: 1fr;
+    /* Mobile */
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .premium-card {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+  }
+
+  /* CINE GALLERY MOBILE (CLINICAL) */
+  .clinical {
+    padding: 4rem 0;
+    height: auto;
+    overflow: auto;
+  }
+
+  .clinical-section-pin {
+    height: auto;
+    display: block;
+  }
+
+  .clinical-header-absolute {
+    position: relative;
+    top: auto;
+    left: auto;
+    padding: 0 5vw;
+    margin-bottom: 3rem;
+    max-width: 100%;
+    pointer-events: auto;
+  }
+
+  .clinical-track-wrapper {
+    height: auto;
+    /* Allow auto height */
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 0;
+    /* Native Horizontal Scroll */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 2rem;
+    scrollbar-width: none;
+  }
+
+  .clinical-track-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clinical-track {
+    padding: 0 5vw;
+    /* Align start */
+    padding-right: 5vw;
+    gap: 1rem;
+    /* Tighter gap */
+    width: max-content;
+    /* Allow flow */
+  }
+
+  .cine-card {
+    min-width: 80vw;
+    /* Reduced to show next card peek */
+    height: 60vh;
+    scroll-snap-align: center;
+    border-radius: 6px;
+  }
+
+  .cine-num {
+    font-size: 4rem;
+    top: auto;
+    bottom: 1rem;
+    right: 1rem;
+    opacity: 0.1;
+  }
+
+  .cine-title {
+    font-size: 1.8rem;
+  }
+
+  /* RESPONSIVE SCENE 3 FIX */
+  /* Keep Editorial List Visible but compact */
+  .facial-editorial-wrapper {
+    margin-top: 0;
+    padding-top: 2rem;
+    min-height: auto;
+  }
+
+  /* Make sure BG covers phone usage too */
+  .facial-bg-layer {
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
+  .facial-bg-img.active {
+    opacity: 0.6;
+  }
+
+  .editorial-item-title {
+    font-size: 1.6rem;
+  }
+
+  .editorial-item-desc {
+    display: block;
+    font-size: 0.85rem;
+    text-align: left;
+    margin-top: 0.5rem;
+    padding-left: 3rem;
+    /* Align with title */
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 100%;
+  }
+
+  .editorial-item {
+    padding: 2.5rem 0;
+    /* Significant increase */
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    /* Visual separation */
+  }
+
+  .editorial-item:hover .editorial-item-title,
+  .editorial-item.mobile-active .editorial-item-title {
+    transform: translateX(10px);
+  }
+
+  /* HIDE fallback list strictly per user request */
+  .service-list-mobile-fallback {
+    display: none !important;
+  }
+
+  /* COMPLEMENTAR: Vertical Grid fallback */
+  .accordion-wrapper {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .acc-item {
+    width: 100%;
+    min-height: 100px;
+    /* Start compact */
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: transparent;
+    transition: min-height 0.5s cubic-bezier(0.25, 1, 0.5, 1), padding 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .acc-item.active {
+    min-height: 350px;
+    /* Expand to show image */
+    justify-content: flex-end;
+    /* Push text to bottom */
+    padding-bottom: 3rem;
+    border-bottom: none;
+  }
+
+  /* Reset for mobile */
+  .acc-item:hover {
+    flex: none;
+    background: transparent;
+  }
+
+  .acc-header-vertical {
+    display: none;
+  }
+
+  .acc-content {
+    opacity: 1;
+    transform: none;
+    padding: 0;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    display: block;
+    transition: all 0.5s ease;
+  }
+
+  /* Initial state for text in collapsed item */
+  .acc-item:not(.active) .acc-desc {
+    display: none;
+    opacity: 0;
+  }
+
+  .acc-item.active .acc-desc {
+    display: block;
+    opacity: 1;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease 0.3s forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .acc-img-bg {
+    display: block;
+    /* Enable image */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+  }
+
+  .acc-item.active .acc-img-bg {
+    opacity: 1;
+    /* Show on active */
+  }
+
+  /* Dark Overlay for Readability */
+  .acc-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+    /* Above image (z0), below text (z2) */
+    pointer-events: none;
+  }
+
+  .acc-item.active::after {
+    opacity: 1;
+  }
+
+  /* Make text visible over image when active */
+  .acc-item {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .acc-item.active .acc-title-big,
+  .acc-item.active .acc-desc {
+    color: var(--ivory);
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .acc-divider {
+    display: none;
+  }
+
+  /* TEAM MOBILE */
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .team-statement {
+    gap: 1rem;
+  }
+
+  .team-portraits-wrapper {
+    gap: 3rem;
+  }
+
+  /* ADJUSTED: Founder Card padding on mobile */
+  .founder-card {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .founder-card .founder-signature-badge {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .squad-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .staggered-card {
+    margin-top: 0;
+  }
+
+  /* Remove stagger on mobile */
+
+  /* FINALE MOBILE (Architectural Upgrade) */
+  /* ADJUSTED: 2 Column Grid for Mobile Footer where possible */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  /* Brand gets full width */
+  .brand-col {
+    grid-column: span 2;
+    padding-right: 0;
+  }
+
+  /* Nav and Legal take 1 col each */
+  /* Contact takes 1 col or 2 depending - let's make it 2 for space */
+  .footer-col:last-child {
+    grid-column: span 2;
+    margin-top: 1rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-bottom: 6rem;
+    /* Space for FAB */
+  }
+
+  .footer-bottom .container {
+    flex-direction: column-reverse;
+    /* Copyright last */
+    gap: 1.5rem;
+  }
+
+  .footer-end-right {
+    padding-right: 0;
+    justify-content: center;
+  }
+
+  .cta-orbit {
+    transform: scale(0.9);
+  }
+
+  /* Slightly smaller on mobile to fit */
+}
+
+/* Lightbox Styles Correto */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  /* Ensure it's on top of everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  /* Passes clicks through when hidden */
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+  /* Blocks clicks when active */
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.active img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.lightbox-close:hover {
+  opacity: 0.7;
+}
+
+/* COOKIE CONSENT SYSTEM STYLES */
+/* =========================================
+   TECHNICAL LUXURY COOKIE CONSENT
+   ========================================= */
+
+/* Main Container: Fixed Bottom Left */
+.tech-cookie-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 60;
+  /* Requested z-[60] */
+  font-family: var(--font-body);
+  width: 100%;
+  max-width: 420px;
+  pointer-events: none;
+  /* Let clicks pass through if hidden */
+  opacity: 0;
+  transform: translateY(20px);
+  /* GSAP will handle the entrance */
+}
+
+/* Glass Card */
+.tech-cookie-card {
+  position: relative;
+  background: rgba(15, 15, 16, 0.95);
+  /* bg-[#0f0f10]/95 */
+  backdrop-filter: blur(24px);
+  /* backdrop-blur-xl */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* border-white/10 */
+  border-radius: 4px;
+  padding: 0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+/* Atmospheric Glow */
+.tech-cookie-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(212, 197, 168, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Content Wrapper */
+.tech-cookie-main {
+  padding: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography */
+.tech-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--ivory);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tech-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.tech-link {
+  color: var(--color-gold);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border 0.3s;
+}
+
+.tech-link:hover {
+  border-bottom-color: var(--color-gold);
+}
+
+/* Expandable Settings Area */
+.tech-settings-wrapper {
+  background: rgba(0, 0, 0, 0.2);
+  height: 0;
+  /* JS will expand this */
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tech-switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-switch-row:last-child {
+  border-bottom: none;
+}
+
+.tech-label-name {
+  display: block;
+  font-family: monospace;
+  /* Mono font requested */
+  font-size: 0.75rem;
+  color: var(--ivory);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+
+.tech-label-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Custom Switch Component */
+.tech-switch {
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  padding: 0;
+}
+
+.tech-switch-knob {
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Active State */
+.tech-switch[aria-pressed="true"] {
+  background: var(--color-gold);
+}
+
+.tech-switch[aria-pressed="true"] .tech-switch-knob {
+  transform: translateX(20px);
+}
+
+/* Locked State */
+.tech-switch.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tech-switch.locked .tech-switch-knob {
+  background: #888;
+}
+
+.tech-switch.locked[aria-pressed="true"] {
+  background: var(--color-gold);
+}
+
+.tech-switch.locked[aria-pressed="true"] .tech-switch-knob {
+  background: #fff;
+}
+
+/* Action Buttons */
+.tech-actions {
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-btn {
+  flex: 1;
+  padding: 0.8rem 0;
+  font-family: monospace;
+  /* Mono font requested */
+  font-size: 0.7rem;
+  /* Small & Technical */
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.tech-btn.outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tech-btn.outline:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tech-btn.solid {
+  background: var(--ivory);
+  border: 1px solid var(--ivory);
+  color: #000;
+  font-weight: 600;
+}
+
+.tech-btn.solid:hover {
+  background: #fff;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Loader for Button */
+.btn-loader {
+  display: none;
+  /* Hidden unless loading */
+  width: 14px;
+  height: 14px;
+  border: 2px solid #000;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: techSpin 0.8s linear infinite;
+  margin-left: 8px;
+}
+
+.tech-btn.solid.loading .btn-text {
+  /* keep text visible or hide? Let's keep it */
+}
+
+.tech-btn.solid.loading .btn-loader {
+  display: block;
+}
+
+@keyframes techSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .tech-cookie-container {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* FINAL FAB & FOOTER MOBILE FIXES - FORCE OVERRIDE */
+.fab-chat-wrapper {
+  position: fixed !important;
+  bottom: 2rem !important;
+  right: 2rem !important;
+  z-index: 9999 !important;
+  /* Ensure it is on top */
+  display: block !important;
+  /* Ensure visibility */
+}
+
+@media (max-width: 768px) {
+  .fab-chat-wrapper {
+    bottom: 1.5rem !important;
+    right: 1.5rem !important;
+  }
+
+  .footer-bottom {
+    padding-bottom: 7rem !important;
+    /* Massive padding to clear FAB */
+  }
+
+  .footer-bottom .container {
+    flex-direction: column-reverse !important;
+  }
+
+  .footer-end-right {
+    padding-right: 0 !important;
+    margin-bottom: 1rem;
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  .agency-logo {
+    opacity: 1 !important;
+    /* Force visibility on mobile */
+  }
+}
