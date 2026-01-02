@@ -3046,340 +3046,141 @@ nav.nav-menu a:hover::after {
     width: 100%;
   }
 
-  .tech-switch-row:last-child {
-    border-bottom: none;
-  }
+}
 
-  .tech-label-name {
-    display: block;
-    font-family: monospace;
-    /* Mono font requested */
-    font-size: 0.75rem;
-    color: var(--ivory);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.2rem;
-  }
-
-  .tech-label-desc {
-    display: block;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4);
-  }
-
-  /* Custom Switch Component */
-  .tech-switch {
-    width: 44px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    border: none;
-    position: relative;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    padding: 0;
-  }
-
-  .tech-switch-knob {
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Active State */
-  .tech-switch[aria-pressed="true"] {
-    background: var(--color-gold);
-  }
-
-  .tech-switch[aria-pressed="true"] .tech-switch-knob {
-    transform: translateX(20px);
-  }
-
-  /* Locked State */
-  .tech-switch.locked {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .tech-switch.locked .tech-switch-knob {
-    background: #888;
-  }
-
-  .tech-switch.locked[aria-pressed="true"] {
-    background: var(--color-gold);
-  }
-
-  .tech-switch.locked[aria-pressed="true"] .tech-switch-knob {
-    background: #fff;
-  }
-
-  /* Action Buttons */
-  .tech-actions {
-    padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .tech-btn {
-    flex: 1;
-    padding: 0.8rem 0;
-    font-family: monospace;
-    /* Mono font requested */
-    font-size: 0.7rem;
-    /* Small & Technical */
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  .tech-btn.outline {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .tech-btn.outline:hover {
-    border-color: var(--color-gold);
-    color: var(--color-gold);
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  .tech-btn.solid {
-    background: var(--ivory);
-    border: 1px solid var(--ivory);
-    color: #000;
-    font-weight: 600;
-  }
-
-  .tech-btn.solid:hover {
-    background: #fff;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
-  }
-
-  /* Loader for Button */
-  .btn-loader {
-    display: none;
-    /* Hidden unless loading */
-    width: 14px;
-    height: 14px;
-    border: 2px solid #000;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: techSpin 0.8s linear infinite;
-    margin-left: 8px;
-  }
-
-
-
-  .tech-btn.solid.loading .btn-loader {
-    display: block;
-  }
-
-  @keyframes techSpin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  /* Mobile Responsive */
-  @media (max-width: 480px) {
-    .tech-cookie-container {
-      left: 1rem;
-      right: 1rem;
-      bottom: 1rem;
-      width: auto;
-      max-width: none;
-    }
-  }
-
-  /* FINAL FAB & FOOTER MOBILE FIXES - FORCE OVERRIDE */
-  .fab-chat-wrapper {
-    position: fixed !important;
-    bottom: 2rem !important;
-    right: 2rem !important;
-    z-index: 9999 !important;
-    /* Ensure it is on top */
-    display: block !important;
-    /* Ensure visibility */
-  }
-
-  @media (max-width: 768px) {
-    .fab-chat-wrapper {
-      bottom: 1.5rem !important;
-      right: 1.5rem !important;
-    }
-
-    .footer-bottom {
-      padding-bottom: 7rem !important;
-      /* Massive padding to clear FAB */
-    }
-
-    .footer-bottom .container {
-      flex-direction: column-reverse !important;
-    }
-
-    .footer-end-right {
-      padding-right: 0 !important;
-      margin-bottom: 1rem;
-      justify-content: center !important;
-      width: 100%;
-    }
-
-    .agency-logo {
-      opacity: 1 !important;
-      /* Force visibility on mobile */
-    }
-  }
-
-  /* =========================================================================================
+/* =========================================================================================
        MOBILE MENU OVERLAY & TOGGLE
        ========================================================================================= */
 
-  /* Button Styling (Hidden on Desktop) */
-  .mobile-menu-btn {
-    display: none;
-  }
+/* Button Styling (Hidden on Desktop) */
+.mobile-menu-btn {
+  display: none;
+}
 
-  /* Overlay Styling (Hidden by default) */
-  .mobile-nav-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 10, 11, 0.98);
-    /* Deep Graphite */
-    z-index: 999;
-    /* Below Loader (9999) but above Header (100) */
+/* Overlay Styling (Hidden by default) */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 11, 0.98);
+  /* Deep Graphite */
+  z-index: 999;
+  /* Below Loader (9999) but above Header (100) */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px);
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Nav Link Styling in Overlay */
+.mobile-nav-link {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  /* Large readable text */
+  font-weight: 300;
+  color: var(--ivory);
+  text-decoration: none;
+  text-transform: capitalize;
+  letter-spacing: -0.02em;
+  transform: translateY(30px);
+  /* Start offset */
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Stagger delays handled in JS or via nth-child */
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.mobile-nav-overlay.active .mobile-nav-link:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+
+/* Mobile Responsive Toggle Visibility */
+@media (max-width: 1024px) {
+  .mobile-menu-btn {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    backdrop-filter: blur(20px);
+    justify-content: space-between;
+    width: 32px;
+    height: 12px;
+    /* Compact two lines */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    /* Above Overlay */
+    position: relative;
+    margin-left: 1rem;
+    padding: 0;
   }
 
-  .mobile-nav-overlay.active {
-    opacity: 1;
-    pointer-events: all;
+  .mobile-menu-btn span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: var(--ivory);
+    transition: all 0.3s ease;
+    transform-origin: center;
   }
 
-  /* Nav Link Styling in Overlay */
-  .mobile-nav-link {
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    /* Large readable text */
-    font-weight: 300;
-    color: var(--ivory);
-    text-decoration: none;
-    text-transform: capitalize;
-    letter-spacing: -0.02em;
-    transform: translateY(30px);
-    /* Start offset */
-    transition: all 0.5s ease;
-    opacity: 0;
+  /* Hamburger Animation State */
+  .mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(5px) rotate(45deg);
+    background-color: var(--color-gold);
   }
 
-  .mobile-nav-overlay.active .mobile-nav-link {
-    transform: translateY(0);
-    opacity: 1;
+  .mobile-menu-btn.active span:nth-child(2) {
+    transform: translateY(-5px) rotate(-45deg);
+    background-color: var(--color-gold);
   }
 
-  /* Stagger delays handled in JS or via nth-child */
-  .mobile-nav-overlay.active .mobile-nav-link:nth-child(1) {
-    transition-delay: 0.1s;
+  /* Adjust Header Layout to accommodate button */
+  .header {
+    justify-content: space-between;
+    padding-right: 1.5rem;
+    /* Ensure space */
   }
 
-  .mobile-nav-overlay.active .mobile-nav-link:nth-child(2) {
-    transition-delay: 0.2s;
+  /* Ensure Reservar button stays visible or adjust */
+  .cta-header-outline {
+    margin-left: auto;
+    /* Push to right? No, standard flex justify-between works: Logo - Space - Button */
+    /* If we insert Menu Btn, it becomes Logo - Btn - CTA? */
+    /* We want Logo - CTA - Btn */
+    order: 2;
   }
 
-  .mobile-nav-overlay.active .mobile-nav-link:nth-child(3) {
-    transition-delay: 0.3s;
+  .mobile-menu-btn {
+    order: 3;
+    /* Force to right end */
   }
-
-  .mobile-nav-overlay.active .mobile-nav-link:nth-child(4) {
-    transition-delay: 0.4s;
-  }
-
-  .mobile-nav-overlay.active .mobile-nav-link:nth-child(5) {
-    transition-delay: 0.5s;
-  }
-
-
-  /* Mobile Responsive Toggle Visibility */
-  @media (max-width: 1024px) {
-    .mobile-menu-btn {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 32px;
-      height: 12px;
-      /* Compact two lines */
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 1001;
-      /* Above Overlay */
-      position: relative;
-      margin-left: 1rem;
-      padding: 0;
-    }
-
-    .mobile-menu-btn span {
-      display: block;
-      width: 100%;
-      height: 1px;
-      background-color: var(--ivory);
-      transition: all 0.3s ease;
-      transform-origin: center;
-    }
-
-    /* Hamburger Animation State */
-    .mobile-menu-btn.active span:nth-child(1) {
-      transform: translateY(5px) rotate(45deg);
-      background-color: var(--color-gold);
-    }
-
-    .mobile-menu-btn.active span:nth-child(2) {
-      transform: translateY(-5px) rotate(-45deg);
-      background-color: var(--color-gold);
-    }
-
-    /* Adjust Header Layout to accommodate button */
-    .header {
-      justify-content: space-between;
-      padding-right: 1.5rem;
-      /* Ensure space */
-    }
-
-    /* Ensure Reservar button stays visible or adjust */
-    .cta-header-outline {
-      margin-left: auto;
-      /* Push to right? No, standard flex justify-between works: Logo - Space - Button */
-      /* If we insert Menu Btn, it becomes Logo - Btn - CTA? */
-      /* We want Logo - CTA - Btn */
-      order: 2;
-    }
-
-    .mobile-menu-btn {
-      order: 3;
-      /* Force to right end */
-    }
-  }
+}
