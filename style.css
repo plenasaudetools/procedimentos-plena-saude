@@ -3359,3 +3359,29 @@ nav.nav-menu a:hover::after {
     margin-top: 0.5rem;
   }
 }
+
+/* Mobile Menu Close Button */
+.mobile-nav-close {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #f2f2eb;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.mobile-nav-close:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  transform: rotate(90deg);
+}

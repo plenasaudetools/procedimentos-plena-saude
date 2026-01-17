@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const overlayHTML = `
       <div class="mobile-nav-overlay">
+        <button class="mobile-nav-close" aria-label="Fechar Menu">&times;</button>
         <a href="${basePath}#cycle" class="mobile-nav-link">O Ciclo</a>
         <a href="${basePath}#facial" class="mobile-nav-link">Estética Facial</a>
         <a href="${basePath}#complementary" class="mobile-nav-link">Complementar</a>
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Bind Logic
     const menuBtn = header.querySelector('.mobile-menu-btn');
     const overlay = document.querySelector('.mobile-nav-overlay');
+    const closeBtn = overlay.querySelector('.mobile-nav-close');
     const links = overlay.querySelectorAll('.mobile-nav-link');
 
     if (menuBtn && overlay) {
@@ -53,6 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       menuBtn.addEventListener('click', toggleMenu);
+
+      // Close button
+      if (closeBtn) {
+        closeBtn.addEventListener('click', toggleMenu);
+      }
 
       // Close on link click
       links.forEach(link => {
