@@ -987,234 +987,289 @@ nav.nav-menu a:hover::after {
   opacity: 0.5;
 }
 
-/* Duplicated block removed. Keystone line deleted. */
+/* =============================================
+   CLINICAL SECTION - COMPLETELY REBUILT
+   All classes use .clinical-* namespace
+   ============================================= */
 
-.clinical-section-pin {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* Section Container */
+.clinical-section {
+  background-color: #050505;
+  padding: 80px 0 60px;
   position: relative;
   overflow: hidden;
-  background-color: var(--graphite-deep);
-  /* Ensure opacity over other sections */
-  z-index: 10;
-  /* Keep above subsequent sections during pinning */
 }
 
-.clinical-header-absolute {
+/* Curve Divider */
+.clinical-divider {
   position: absolute;
-  top: 2rem;
-  /* Move text up */
-  left: 5vw;
-  z-index: 10;
-  max-width: 40vw;
-  /* Allow wider text */
-  pointer-events: none;
-  /* Let clicks pass */
-}
-
-/* Header Text styling fix for dark mode */
-.clinical-header-absolute .text-title {
-  color: var(--ivory);
-}
-
-.clinical-header-absolute .highlight {
-  color: #888;
-}
-
-/* Muted silver */
-
-.clinical-progress-container {
-  margin-top: 2rem;
-  width: 150px;
-  /* Small line on desktop */
-}
-
-.clinical-progress-line {
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  position: relative;
   overflow: hidden;
+  line-height: 0;
+  transform: translateY(-99%);
 }
 
-.clinical-progress-fill-bar {
-  width: 0%;
-  height: 100%;
-  background: var(--color-gold);
-  transition: width 0.1s linear;
-  /* Smooth for JS updates */
+.clinical-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
 }
 
-/* Mobile: Expand to be more visible? */
-@media (max-width: 768px) {
-  .clinical-progress-container {
-    width: 100%;
-    /* Full width or larger */
-    margin-top: 1rem;
-  }
+/* Container */
+.clinical-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* Header */
+.clinical-header {
+  margin-bottom: 40px;
+}
 
-.clinical-track-wrapper {
-  height: 70vh;
-  /* Focus area height */
-  margin-top: 25vh;
-  /* Greatly increased to push cards DOWN below the text */
-  width: 100%;
+.clinical-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 16px;
+  padding-left: 60px;
+  position: relative;
+}
+
+.clinical-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.clinical-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: #f2f2eb;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.clinical-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-style: italic;
+  color: #888;
+  margin-bottom: 0;
+}
+
+/* Navigation */
+.clinical-nav {
+  margin-top: 24px;
+}
+
+.clinical-hint {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 12px;
+}
+
+.clinical-buttons {
   display: flex;
   align-items: center;
-  /* Will be controlled by GSAP on Desktop */
+  gap: 16px;
 }
 
-.clinical-track {
-  display: flex;
-  gap: 4rem;
-  /* Wide gap for luxury feel */
-  padding-left: 45vw;
-  /* Start pushed right so text is visible first */
-  padding-right: 10vw;
-  /* End with breathing room */
-  width: max-content;
-  /* Ensure it takes full width of children */
+.clinical-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  color: #f2f2eb;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: grid;
+  place-items: center;
 }
 
-/* CINE CARD STYLE */
-.cine-card {
-  min-width: 400px;
-  /* Big posters */
-  height: 55vh;
-  /* Cinematic height */
-  position: relative;
-  border-radius: 4px;
+.clinical-btn:hover {
+  border-color: #d4c5a8;
+  color: #d4c5a8;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.clinical-progress {
+  width: 80px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.4s ease;
-  flex-shrink: 0;
-  background: #000;
 }
 
-.cine-card img {
+.clinical-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #d4c5a8;
+  transition: width 0.15s ease-out;
+}
+
+/* Carousel */
+.clinical-carousel {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.clinical-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.clinical-cards {
+  display: flex;
+  gap: 24px;
+  padding: 0 20px;
+  width: max-content;
+}
+
+/* Cards */
+.clinical-card {
+  flex: 0 0 380px;
+  height: 480px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.clinical-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-  filter: brightness(0.6) grayscale(10%);
+  filter: brightness(0.6);
+  transition: transform 0.8s ease, filter 0.5s ease;
 }
 
-.cine-card:hover img {
+.clinical-card:hover img {
   transform: scale(1.05);
-  filter: brightness(0.8) grayscale(0%);
+  filter: brightness(0.75);
 }
 
-/* FINAL LUXURY CTA CARD */
-.cine-card-cta {
-  background: linear-gradient(145deg, rgba(20, 20, 22, 1) 0%, rgba(10, 10, 12, 1) 100%);
-  border: 1px solid rgba(212, 197, 168, 0.2);
-  /* Subtle Gold Border */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Internal Glow */
-.cine-card-cta::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle, rgba(212, 197, 168, 0.1) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.cine-card-cta .cta-content {
-  text-align: center;
-  color: var(--ivory);
-  z-index: 2;
-  padding: 2rem;
-}
-
-.cine-card-cta h3 {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 400;
-  margin-bottom: 2.5rem;
-  color: var(--color-gold);
-  /* Gold Text */
-  letter-spacing: 0.05em;
-  line-height: 1.2;
-}
-
-/* Special Button for this Card */
-.cine-card-cta .cta-main {
-  background: var(--color-gold);
-  color: var(--graphite-deep);
-  /* Contrast */
-  border: none;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  padding: 1rem 2.5rem;
-  box-shadow: 0 4px 20px rgba(212, 197, 168, 0.3);
-  /* Gold Glow */
-  transition: all 0.4s ease;
-}
-
-.cine-card-cta .cta-main:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(212, 197, 168, 0.5);
-  background: #fff;
-  /* Flash white on hover */
-}
-
-/* CTA Card Styles Completed */
-
-/* Glass Overlay Content */
-.cine-overlay {
+/* Card Overlay */
+.clinical-card-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  padding: 2.5rem 2rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 10%, transparent);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
 }
 
-.cine-num {
+.clinical-card-num {
   font-family: var(--font-display);
-  font-size: 5rem;
-  line-height: 0.8;
+  font-size: 4rem;
+  line-height: 1;
   color: rgba(255, 255, 255, 0.05);
-  /* Ghost number */
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  pointer-events: none;
+  top: 16px;
+  right: 16px;
 }
 
-.cine-title {
+.clinical-card-title {
   font-family: var(--font-display);
-  font-size: 2.2rem;
-  color: var(--ivory);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #f2f2eb;
+  margin-bottom: 8px;
 }
 
-.cine-desc {
+.clinical-card-desc {
   font-family: var(--font-body);
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  max-width: 95%;
-  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* CTA Card */
+.clinical-card-cta {
+  background: linear-gradient(145deg, #181818 0%, #0a0a0a 100%);
+  border: 1px solid rgba(212, 197, 168, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clinical-cta-content {
+  text-align: center;
+  padding: 32px;
+}
+
+.clinical-cta-content h3 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #d4c5a8;
+  margin-bottom: 24px;
+}
+
+.clinical-cta-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: #d4c5a8;
+  color: #050505;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.clinical-cta-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 197, 168, 0.3);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .clinical-section {
+    padding: 60px 0 40px;
+  }
+
+  .clinical-cards {
+    gap: 16px;
+  }
+
+  .clinical-card {
+    flex: 0 0 280px;
+    height: 380px;
+  }
+
+  .clinical-card-title {
+    font-size: 1.4rem;
+  }
+
+  .clinical-card-desc {
+    font-size: 0.85rem;
+  }
+
+  .clinical-card:last-child {
+    margin-right: 20px;
+  }
 }
 
 /* =========================================
@@ -3182,5 +3237,125 @@ nav.nav-menu a:hover::after {
   .mobile-menu-btn {
     order: 3;
     /* Force to right end */
+  }
+}
+
+/* =============================================
+   UX IMPROVEMENTS FOR 40+ AUDIENCE
+   ============================================= */
+
+/* Step Descriptions in Cycle Section */
+.step-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+  max-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .step-desc {
+    font-size: 0.85rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .cycle-step-item {
+    text-align: center;
+  }
+}
+
+/* CTA Helper Text */
+.cta-helper-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin-top: 2rem;
+  letter-spacing: 0.05em;
+}
+
+/* Footer WhatsApp Button */
+.footer-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #25D366;
+  color: #fff !important;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-whatsapp-btn:hover {
+  background: #20bd5a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+}
+
+.footer-whatsapp-btn svg {
+  flex-shrink: 0;
+}
+
+/* Footer Address Link */
+.footer-address-link {
+  display: block;
+  color: rgba(255, 255, 255, 0.7) !important;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.footer-address-link:hover {
+  color: var(--color-gold) !important;
+}
+
+/* Larger Button Targets for Clinical Section (Mobile) */
+@media (max-width: 768px) {
+  .clinical-btn {
+    width: 56px;
+    height: 56px;
+    font-size: 1.4rem;
+  }
+
+  /* Increase card title size for readability */
+  .clinical-card-title {
+    font-size: 1.6rem;
+  }
+
+  /* Better contrast for descriptions */
+  .clinical-card-desc {
+    color: rgba(255, 255, 255, 0.75);
+  }
+}
+
+/* Footer links larger on mobile */
+@media (max-width: 768px) {
+
+  .footer-links li a,
+  .footer-links li span {
+    font-size: 1rem;
+    padding: 4px 0;
+    display: inline-block;
+  }
+}
+
+/* Slower orbit animation for accessibility */
+.orbit-ring-1,
+.orbit-ring-2 {
+  animation-duration: 12s;
+  /* Slowed from 8s */
+}
+
+/* Editorial list - show descriptions on mobile */
+@media (max-width: 768px) {
+  .editorial-item-desc {
+    display: block !important;
+    opacity: 1 !important;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.5rem;
   }
 }

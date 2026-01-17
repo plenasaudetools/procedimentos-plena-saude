@@ -81,64 +81,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 1. HORIZONTAL SCROLL FOR CLINICAL SECTION (Desktop Only)
-  // 1. HORIZONTAL SCROLL FOR CLINICAL SECTION (Responsive)
-  const raceContainer = document.querySelector(".clinical-track-wrapper");
-  const race = document.querySelector(".clinical-track");
+  // =============================================
+  // CLINICAL SECTION - CAROUSEL REBUILT
+  // =============================================
+  const clinicalCarousel = document.querySelector('.clinical-carousel');
+  const clinicalBtnPrev = document.querySelector('.clinical-btn-prev');
+  const clinicalBtnNext = document.querySelector('.clinical-btn-next');
+  const clinicalProgressBar = document.querySelector('.clinical-progress-bar');
 
-  if (raceContainer && race) {
-    function getScrollAmount() {
-      let raceWidth = race.scrollWidth;
-      // Adjusted offset calculation for mobile vs desktop
-      if (window.innerWidth <= 1024) {
-        // Mobile offset
-        return -(raceWidth - window.innerWidth + 20);
-      }
-      return -(raceWidth - window.innerWidth + 100);
+  if (clinicalCarousel) {
+    // Scroll amount: card width + gap
+    const scrollAmount = 304; // 280px card + 24px gap (mobile-friendly)
+
+    // Next button
+    if (clinicalBtnNext) {
+      clinicalBtnNext.addEventListener('click', () => {
+        clinicalCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
     }
 
-    // Determine scroll distance based on device to control speed feel
-    const isMobile = window.innerWidth <= 1024;
-    // Mobile needs MORE vertical scroll to cover the horizontal width comfortably
-    const scrollDistance = isMobile ? "+=4500" : "+=3500";
+    // Previous button
+    if (clinicalBtnPrev) {
+      clinicalBtnPrev.addEventListener('click', () => {
+        clinicalCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+    }
 
-    // Dynamic horizontal scroll with friction
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".clinical-section-pin",
-        start: "top top",
-        end: scrollDistance,
-        pin: true,
-        anticipatePin: 1, // Smooths out pinning transition
-        scrub: 1, // Smooth interaction
-        invalidateOnRefresh: true, // Recalculate on resize
-      }
-    });
-
-    tl.to(race, {
-      x: () => getScrollAmount(), // Function ensures recalculation if dimensions change
-      ease: "power2.out", // Starts elegant/fast, ends with strong resistance (friction)
-      duration: 1
-    });
-
-    // Sync Progress Bar (Universal)
-    tl.to(".clinical-progress-fill-bar", {
-      width: "100%",
-      ease: "none"
-    }, "<");
-  }
-
-  // Mobile Progress Bar Logic (Native Scroll)
-  const trackWrapper = document.querySelector(".clinical-track-wrapper");
-  const progressBar = document.querySelector(".clinical-progress-fill-bar");
-
-  if (trackWrapper && progressBar) {
-    trackWrapper.addEventListener("scroll", () => {
-      const maxScroll = trackWrapper.scrollWidth - trackWrapper.clientWidth;
-      if (maxScroll > 0) {
-        const currentScroll = trackWrapper.scrollLeft;
-        const progress = (currentScroll / maxScroll) * 100;
-        progressBar.style.width = `${progress}%`;
+    // Progress bar
+    clinicalCarousel.addEventListener('scroll', () => {
+      const maxScroll = clinicalCarousel.scrollWidth - clinicalCarousel.clientWidth;
+      if (maxScroll > 0 && clinicalProgressBar) {
+        const progress = (clinicalCarousel.scrollLeft / maxScroll) * 100;
+        clinicalProgressBar.style.width = progress + '%';
       }
     });
   }
